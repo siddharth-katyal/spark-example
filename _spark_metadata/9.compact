@@ -1,0 +1,11 @@
+v1
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-ee31a919-6187-43ff-826a-c7db84231cdd-c000.json","size":0,"isDir":false,"modificationTime":1680532999000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-0e06b0f2-f51a-4ed0-ae94-678ea82d9276-c000.json","size":0,"isDir":false,"modificationTime":1680533004000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-7a300095-455d-4264-b5c2-cab8c4b60dea-c000.json","size":0,"isDir":false,"modificationTime":1680533020000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-a8709f3c-6c33-44bd-b410-c7415ad99718-c000.json","size":140,"isDir":false,"modificationTime":1680533053000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-48baf2ed-295b-46bd-b26d-aa145fc64562-c000.json","size":140,"isDir":false,"modificationTime":1680533072000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-d92a70af-c3e7-4c07-8d0f-0a62c6df171b-c000.json","size":140,"isDir":false,"modificationTime":1680533100000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-fd75ff6e-7461-44ab-a0af-d0fed5f9f266-c000.json","size":0,"isDir":false,"modificationTime":1680533101000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-d961ece9-6c6e-47fc-8194-9280d80be08e-c000.json","size":0,"isDir":false,"modificationTime":1680533216000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-58f430e5-cc7a-4a62-8b2d-540cd46ef964-c000.json","size":0,"isDir":false,"modificationTime":1680533220000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///Users/hevo/Documents/Hevo/spark-example/part-00000-a90e05eb-5ad7-4c89-8a74-be989845f093-c000.json","size":0,"isDir":false,"modificationTime":1680533240000,"blockReplication":1,"blockSize":33554432,"action":"add"}
