@@ -1,4 +1,6 @@
 package com.test.app;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.streaming.DataStreamWriter;
 import org.apache.spark.sql.streaming.StreamingQuery;
@@ -13,11 +15,11 @@ import java.util.concurrent.TimeoutException;
 public class StreamReadExample {
     public static void main(String[] args) throws TimeoutException, StreamingQueryException {
         // create a local SparkSession
-        SparkSession spark = SparkSession.builder()
-                .appName("readExample")
-                .master("local[*]")
-                .getOrCreate();
-        spark.sparkContext().setLogLevel("OFF");
+        SparkConf conf = new SparkConf().setAppName("readExample")
+                .setMaster("local[*]");
+        JavaSparkContext context = new JavaSparkContext(conf);
+        SparkSession spark = new SparkSession(context.sc());
+//        spark.sparkContext().setLogLevel("OFF");
         // define the schema of the source collection
         StructType readSchema = new StructType()
                 .add("_id", DataTypes.StringType)
@@ -32,11 +34,10 @@ public class StreamReadExample {
 
         Dataset<Row> rows = spark.readStream()
                 .format("mongodb")
-                .option("spark.mongodb.connection.uri", "mongodb://root:rootROOT@10.0.19.156:27017")
-                .option("spark.mongodb.database", "test")
-                .option("spark.mongodb.collection", "test2")
+                .option("spark.mongodb.connection.uri", "mongodb://root:rootROOT@10.0.22.186:27017")
+                .option("spark.mongodb.database", "braavos")
+                .option("spark.mongodb.collection", "cities")
                 .option("spark.mongodb.change.stream.publish.full.document.only","true")
-                .schema(readSchema)
                 .load();
         final long[] start_time = {System.currentTimeMillis()};
 
@@ -47,7 +48,7 @@ public class StreamReadExample {
         final int[] count = {0};
         DataStreamWriter<Row> dataStreamWriter = rows
                 .writeStream()
-                .format("com.microsoft.sqlserver.jdbc.spark")
+                .format("")
                 .foreach(new ForeachWriter<Row>() {
                     @Override
                     public boolean open(long partitionId, long epochId) {
@@ -63,6 +64,7 @@ public class StreamReadExample {
                     @Override
                     public void process(Row value) {
                         String _id = value.getAs("_id");
+                        System.out.println(_id);
                         String country_code = value.getAs("country_code");
                         Double country_id = value.getAs("country_id");
                         Double id = value.getAs("id");
@@ -78,16 +80,16 @@ public class StreamReadExample {
                             System.out.println("\nSTART TIME: " + start_time[0] + "\n");
 
                         }
-                        if(count[0]%100000==0) {
+                        if(count[0]%10000==0) {
                             end_time[0] = System.currentTimeMillis();
                             difference[0] = end_time[0] - start_time[0];
                             System.out.println("\n"+count[0]+"TIME: " + difference[0]/1000 + "s\n");
                         }
-                        if(count[0]==1000000){
+                        if(count[0]==100000){
                             System.out.println("\nEND TIME: " + difference[0]/1000 + "s\n");
                         }
                         String insertSql = String.format("insert into test(_id,country_code,country_id,id,latitude,longitude,name,state_code,state_id) values('%s' , '%s' , %f , %f , '%s' , '%s' , '%s' , '%s' , %f)", _id, country_code, country_id, id, latitude, longitude, name, state_code, state_id);
-////                        System.out.println("\n\n\n\n\n\n\n\n"+insertSql+"\n\n\n\n\n\n\n\n");
+                        System.out.println("\n\n\n\n\n\n\n\n"+insertSql+"\n\n\n\n\n\n\n\n");
                         try {
                             statement[0].execute(insertSql);
                         } catch (SQLException e) {
